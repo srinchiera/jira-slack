@@ -23,14 +23,14 @@ slack_parser.add_argument('-t', action='store', help='Issue Type', dest='issue_t
     type=str.lower, choices=['task', 'bug', 'new_feature', 'improvement', 'question', 'story',
      'epic', 'target_result'])
 
-create_parser = argparse.ArgumentParser(description='For creating Jira Issues', parents=[slack_parser])
+create_parser = argparse.ArgumentParser(description='For creating Jira Issues', parents=[slack_parser], add_help=True)
 create_parser.add_argument('title', action='store', help='Summary of Jira issue')
 
-modify_parser = argparse.ArgumentParser(description='For modifying Jira Issues', parents=[slack_parser])
+modify_parser = argparse.ArgumentParser(description='For modifying Jira Issues', parents=[slack_parser], add_help=True)
 modify_parser.add_argument('ticket_id', action='store', help='ID of jira issue, ie ABC-123')
 
-show_parser = argparse.ArgumentParser(description='For showing Jira Issues in a certain project',
-    parents=[slack_parser])
+show_parser = argparse.ArgumentParser(description='For showing Jira Issues in a certain project', 
+    parents=[slack_parser], add_help=True)
 show_parser.add_argument('project', action='store', help='project abbreviation')
 
 def parse_slack_string(command, slack_string, username, api):
@@ -39,7 +39,7 @@ def parse_slack_string(command, slack_string, username, api):
     their username, and an instance of the JiraApi are passed into this method,
     which interprets the string and calls the appropriate method in JiraApi
     """
-
+    
     if command == 'show':
         parser = show_parser
     elif command == 'modify':
