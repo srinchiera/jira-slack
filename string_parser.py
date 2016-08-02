@@ -48,7 +48,7 @@ def parse_slack_string(slack_string, username, api):
 				issue_type = 'Task'
 			if not reporter:
 				reporter = username
-			if not all([title, project reporter, issue_type]):
+			if not all([title, project, reporter, issue_type]):
 				raise Exception
 			else:
 				return api.create(project, title, issue_type, assignee=assignee, reporter=reporter, description=description)
