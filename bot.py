@@ -8,12 +8,16 @@ from config import (
     JIRA_URL,
     USERNAME,
     PASSWORD,
+    TOKEN
 )
+import pdb
+pdb.set_trace()
 
 def start():
+
     """Start bot"""
 
-    token = "xoxb-65523164182-nJvL51iyz0lE5mXInXSqxYYG"
+    token = TOKEN
     sc = SlackClient(token)
     jira_client = JIRA(JIRA_URL, basic_auth=(USERNAME, PASSWORD))
     jira_api = JiraApi(jira_client)
