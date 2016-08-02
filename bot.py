@@ -9,7 +9,6 @@ from config import (
     TOKEN
 )
 
-
 def start():
     """Start bot"""
 
@@ -23,10 +22,10 @@ def start():
     while True:
         events = sc.rtm_read()
         for event in events:
-            handle_event(sc, event)
+            handle_event(sc, jira_api, event)
+            time.sleep(.1)
 
-
-def handle_event(sc, event):
+def handle_event(sc, jira_api, event):
     """Processes event message and making call to API when necessary"""
 
     event_type = event.get("type")
@@ -41,7 +40,7 @@ def handle_event(sc, event):
         return
 
     command = message[1]
-    args = message[2:]
+    args = ' '.join(message[2:])
 
     user_id = event.get("user")
     user_name = sc.server.users.find(user_id).name

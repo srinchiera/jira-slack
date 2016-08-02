@@ -29,7 +29,7 @@ create_parser.add_argument('title', action='store', help='Summary of Jira issue'
 modify_parser = argparse.ArgumentParser(description='For modifying Jira Issues', parents=[slack_parser])
 modify_parser.add_argument('ticket_id', action='store', help='ID of jira issue, ie ABC-123')
 
-show_parser = argparse.ArgumentParser(description='For showing Jira Issues in a certain project', 
+show_parser = argparse.ArgumentParser(description='For showing Jira Issues in a certain project',
     parents=[slack_parser])
 show_parser.add_argument('project', action='store', help='project abbreviation')
 
@@ -40,19 +40,20 @@ def parse_slack_string(command, slack_string, username, api):
     which interprets the string and calls the appropriate method in JiraApi
     """
 
-    words = shlex.split(slack_string)
-
-    if command = 'show':
+    if command == 'show':
         parser = show_parser
-    elif command = 'modify':
+    elif command == 'modify':
         parser = modify_parser
-    elif command = 'create':
+    elif command == 'create':
         parser = create_parser
+    else:
+        return "Invalid command. Please choose on of `show`, `create`, `modify`"
 
     try:
+        words = shlex.split(slack_string)
         arg_dict = vars(parser.parse_args(words))
     except:
-        return parser.parse_args(['-h'])
+        test = str(parser.parse_args(['-h']))
 
     assignee = arg_dict['assignee']
     project = arg_dict['project']
@@ -84,6 +85,5 @@ def parse_slack_string(command, slack_string, username, api):
         if not all([title, project, reporter, issue_type]):
             return 'Please specify the summary, project, reporter and issue type'
         else:
-            return api.create(project, title, issue_type, assignee=assignee, 
-                reporter=reporter, description=description)
-
+            return api.create(project, title, issue_type, assignee=assignee,
+                              reporter=reporter, description=description)
