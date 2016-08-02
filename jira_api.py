@@ -1,14 +1,18 @@
 from config import (
+    JIRA_URL,
     BROWSE_FORMAT_STRING
 )
 from jira import JIRA
 from tabulate import tabulate
 
+
 class JiraApi(object):
     """Object used to communicate with API"""
 
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, username, password):
+        """Establishes connection to JIRA Api"""
+
+        self.client = JIRA(JIRA_URL, basic_auth=(username, password))
         self.show_headers = ['Link', 'Issue Type', 'Status', 'Assignee']
 
 
@@ -82,6 +86,8 @@ class JiraApi(object):
         if issue_params:
             issue = self.client.issue(issue)
             issue.update(fields=issue_params)
+
+        return BROWSE_FORMAT_STRING.format(issue_key.upper())
 
 
     def get_issue_values(self, issue):
