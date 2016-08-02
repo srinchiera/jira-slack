@@ -30,7 +30,7 @@ modify_parser = argparse.ArgumentParser(description='For modifying Jira Issues',
 modify_parser.add_argument('ticket_id', action='store', help='ID of jira issue, ie ABC-123')
 
 show_parser = argparse.ArgumentParser(description='For showing Jira Issues in a certain project', 
-    parents=[slack_parser], add_help=True)
+   parents=[slack_parser], add_help=True)
 show_parser.add_argument('project', action='store', help='project abbreviation')
 
 def parse_slack_string(command, slack_string, username, api):
@@ -39,7 +39,7 @@ def parse_slack_string(command, slack_string, username, api):
     their username, and an instance of the JiraApi are passed into this method,
     which interprets the string and calls the appropriate method in JiraApi
     """
-    
+
     if command == 'show':
         parser = show_parser
     elif command == 'modify':
@@ -69,7 +69,7 @@ def parse_slack_string(command, slack_string, username, api):
         if not all([project]):
             return 'Please specify a project to show'
         else:
-            return api.show(project, issue_type=issue_type, assignee=assignee)
+            return api.show(project, issue_type=issue_type, assignee=assignee, status=status)
     elif command == 'modify':
         ticket_id = arg_dict['ticket_id']
         if not all([ticket_id]):
