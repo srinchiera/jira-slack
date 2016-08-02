@@ -1,3 +1,4 @@
 JIRA_URL = 'https://jira.corp.appnexus.com'
+BROWSE_FORMAT_STRING = 'https://jira.corp.appnexus.com/browse/{}'
 USERNAME = 'USERNAME'
 PASSWORD = 'PASSWORD'

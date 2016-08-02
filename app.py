@@ -12,9 +12,9 @@ jira_api = JiraApi(jira_client)
 
 '''
 jira_api.create(project='OIQ',
-                summary='this is a test',
+                summary='this is a test2',
                 issue_type='Bug',
-                assignee='srinchiera',
+                assignee='jdavison',
                 reporter='srinchiera',
                 description='wow so cool!')
 '''
@@ -23,9 +23,4 @@ jira_api.create(project='OIQ',
 jira_api.modify('OIQ-683', assignee='jhogan', status='Reopen')
 '''
 
-jira_api.show('OIQ-683', assignee='jhogan')
-
-#issue = jira.issue('OIQ-674')
-#print issue.fields.project.key             # 'JRA'
-#print issue.fields.issuetype.name          # 'New Feature'
-#print issue.fields.reporter.displayName    # 'Mike Cannon-Brookes [Atlassian]'
+jira_api.show('OIQ', assignee='srinchiera', issue_type='Bug')
