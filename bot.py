@@ -10,8 +10,6 @@ from config import (
     PASSWORD,
     TOKEN
 )
-import pdb
-pdb.set_trace()
 
 def start():
 
