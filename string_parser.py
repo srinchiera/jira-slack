@@ -66,13 +66,13 @@ def parse_slack_string(command, slack_string, username, api):
     if command == 'show':
         project = arg_dict['project']
         if not all([project]):
-            raise Exception
+            return 'Please specify a project to show'
         else:
             return api.show(project, issue_type=issue_type, assignee=assignee)
     elif command == 'modify':
         ticket_id = arg_dict['ticket_id']
         if not all([ticket_id]):
-            raise Exception
+            return 'Please specify a ticket to modify'
         else:
             return api.modify(ticket_id, assignee=assignee, reporter=reporter, status=status)
     elif command == 'create':
@@ -82,7 +82,7 @@ def parse_slack_string(command, slack_string, username, api):
         if not reporter:
             reporter = username
         if not all([title, project, reporter, issue_type]):
-            raise Exception
+            return 'Please specify the summary, project, reporter and issue type'
         else:
             return api.create(project, title, issue_type, assignee=assignee, 
                 reporter=reporter, description=description)
