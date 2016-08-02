@@ -56,7 +56,7 @@ class JiraApi(object):
 
         issues = self.client.search_issues(search_string)
         issue_values = [self.get_issue_values(issue) for issue in issues]
-        print tabulate(issue_values, headers=self.show_headers)
+        return tabulate(issue_values, headers=self.show_headers)
 
 
     def modify(self, issue, assignee=None, reporter=None, status=None):
